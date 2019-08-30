@@ -146,11 +146,11 @@ class UInt64 {
 
   getBit(idx) {
     if (idx < 32) {
-      const v = Math.pow(2, idx);
+      const v = this.pow2(idx);
       return Math.floor(this.lo / v) % 2;
     }
 
-    const vh = Math.pow(2, idx - 32);
+    const vh = this.pow2(idx - 32);
     return Math.floor(this.hi / vh) % 2;
   }
 
@@ -160,11 +160,11 @@ class UInt64 {
     }
 
     if (idx < 32) {
-      this.lo += Math.pow(2, idx);
+      this.lo += this.pow2(idx);
       return;
     }
 
-    this.hi += Math.pow(2, idx - 32);
+    this.hi += this.pow2(idx - 32);
   }
 
   toString() {
@@ -178,4 +178,12 @@ class UInt64 {
 
     return digits.reverse().map((d) => d.toString()).join('');
   }
-};
+
+  pow2(x) {
+    if (x == 31) {
+      return TWO_32 / 2;
+    }
+
+    return 1 << x;
+  }
+}
