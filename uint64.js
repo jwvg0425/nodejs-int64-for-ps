@@ -67,6 +67,11 @@ class UInt64 {
 
   divmod(x) {
     x = new UInt64(x);
+
+    if (this.lt(x)) {
+      return { div: new UInt64(0), mod: new UInt64(this) };
+    }
+
     const div = new UInt64();
     let mod = new UInt64();
     
@@ -147,11 +152,18 @@ class UInt64 {
   getBit(idx) {
     if (idx < 32) {
       const v = this.pow2(idx);
-      return Math.floor(this.lo / v) % 2;
+      if (idx == 31) {
+        return this.lo >= v ? 1 : 0;
+      }
+      return (this.lo & v) >> idx;
     }
+    idx -= 32;
 
-    const vh = this.pow2(idx - 32);
-    return Math.floor(this.hi / vh) % 2;
+    const vh = this.pow2(idx);
+    if (idx == 31) {
+      return this.hi >= vh ? 1 : 0;
+    }
+    return (this.hi & vh) >> idx;
   }
 
   setBit(idx) {
