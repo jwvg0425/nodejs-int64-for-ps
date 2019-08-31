@@ -2,7 +2,10 @@
   "name": "nodejs-int64-for-ps",
   "version": "1.0.0",
   "description": "알고리즘 문제풀이용 nodejs 64비트 unsigned 정수 구현체. uint64.js 내용 복사해서 쓰시면 됩니다.",
-  "main": "uint64.js",
+  "main": "lib/uint64.js",
+  "directories": {
+    "lib": "./lib"
+  },
   "scripts": {},
   "repository": {
     "type": "git",
