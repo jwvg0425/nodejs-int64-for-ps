@@ -13,12 +13,12 @@ describe("mod", () => {
   it("7 % 2 === 1", () => {
     const mod = new UInt64(7).mod(2);
 
-    expect(mod.lo).toBe(1);
+    expect(mod.toString()).toBe('1');
   });
 
   it("MAX % MOD === 9248435958", () => {
     const mod = new UInt64(MAX).mod(MOD);
 
-    expect(mod.lo).toBe(9248435958);
+    expect(mod.toString()).toBe('9248435958');
   });
 });
